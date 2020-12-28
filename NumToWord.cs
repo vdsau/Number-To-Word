@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 
-namespace Test
+namespace CondoSharp.Helpers
 {
     public class NumToWord
     {
@@ -149,7 +149,10 @@ namespace Test
                 if (number.Length == 3)
                 {
                     int hundred = int.Parse(number[0].ToString());
-                    result = $"{_unitsMap[hundred]} {_higherRankMap[0]} ";
+                    if (hundred != 0)
+                    {
+                        result = $"{_unitsMap[hundred]} {_higherRankMap[0]} ";
+                    }
                     result += DefineTens($"{number.Substring(1, 2)}");
                 }
                 if (number.Length == 2)
@@ -178,25 +181,29 @@ namespace Test
                     // if number == 00 or == 0
                     ;
                 }
-                if (tens < 20)
-                {
-                    // all numbers from 0 to 19
-                    result = _unitsMap[tens];
-                }
                 else
                 {
-                    int firstNum = int.Parse(number[0].ToString());
-                    if (secondNum == 0 && firstNum != 0)
+                    if (tens < 20)
                     {
-                        // for example, 30
-                        result = _tensMap[firstNum];
+                        // all numbers from 0 to 19
+                        result = _unitsMap[tens];
                     }
                     else
                     {
-                        // single number such as 5
-                        result = $"{_tensMap[firstNum]}-{_unitsMap[secondNum]}";
+                        int firstNum = int.Parse(number[0].ToString());
+                        if (secondNum == 0 && firstNum != 0)
+                        {
+                            // for example, 30
+                            result = _tensMap[firstNum];
+                        }
+                        else
+                        {
+                            // single number such as 5
+                            result = $"{_tensMap[firstNum]}-{_unitsMap[secondNum]}";
+                        }
                     }
                 }
+
             }
             return result;
         }
