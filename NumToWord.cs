@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Globalization;
 
-namespace CondoSharp.Helpers
+namespace Test
 {
     public class NumToWord
     {
